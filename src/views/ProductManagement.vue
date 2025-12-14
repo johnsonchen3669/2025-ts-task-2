@@ -23,7 +23,7 @@ import ProductModal from '@/components/ProductModal.vue'
 // TODO: 匯入型別定義
 // 提示：從 @/types/product 匯入 Pagination, ProductData
 import type { Pagination, ProductData } from '@/types/product'
-import { onMounted, ref, useTemplateRef } from 'vue'
+import { onMounted, ref, useTemplateRef, watch } from 'vue'
 
 // TODO: 為模板引用加上型別註解
 // 提示：使用 useTemplateRef<InstanceType<typeof ProductModal>>()
@@ -61,6 +61,10 @@ const getProducts = async () => {
   }
 }
 onMounted(() => {
+  getProducts()
+})
+
+watch(currentPage, () => {
   getProducts()
 })
 

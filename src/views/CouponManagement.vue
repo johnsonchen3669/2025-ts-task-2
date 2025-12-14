@@ -4,7 +4,7 @@ import CouponModal from '@/components/CouponModal.vue'
 import DeleteModal from '@/components/DeleteModal.vue'
 import type { CouponData, Pagination } from '@/types/coupon'
 import { formatDate } from '@/utils/date'
-import { onMounted, ref, useTemplateRef } from 'vue'
+import { onMounted, ref, useTemplateRef, watch } from 'vue'
 
 const initialFormData: CouponData = {
   id: '',
@@ -42,6 +42,10 @@ const getCoupons = async () => {
   }
 }
 onMounted(() => {
+  getCoupons()
+})
+
+watch(currentPage, () => {
   getCoupons()
 })
 
@@ -106,7 +110,7 @@ const deleteCoupon = async (couponId: string) => {
     </button>
   </div>
 
-  <p v-if="!coupons" class="text-center">目前還沒有優惠券</p>
+  <p v-if="!coupons.length" class="text-center">目前還沒有優惠券</p>
   <div v-else class="card shadow-sm rounded-lg flex-grow-1">
     <div class="card-body p-4">
       <div class="table-responsive">
@@ -189,9 +193,9 @@ const deleteCoupon = async (couponId: string) => {
           <li class="page-item">
             <button
               @click="currentPage = String(Number(currentPage) + 1)"
-              :disabled="pagination?.has_next"
+              :disabled="!pagination?.has_next"
               class="page-link"
-              :class="{ disabled: pagination?.has_next }"
+              :class="{ disabled: !pagination?.has_next }"
               type="button"
               aria-label="Next"
             >

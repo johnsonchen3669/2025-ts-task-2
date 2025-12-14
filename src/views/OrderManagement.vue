@@ -3,7 +3,7 @@ import { apiDeleteOrder, apiGetOrders } from '@/api/order'
 import DeleteModal from '@/components/DeleteModal.vue'
 import OrderDetailModal from '@/components/OrderDetailModal.vue'
 import type { Order, Pagination } from '@/types/order'
-import { onMounted, ref, useTemplateRef } from 'vue'
+import { onMounted, ref, useTemplateRef, watch } from 'vue'
 
 const orderDetailModalRef = useTemplateRef('orderDetailModalRef')
 const deleteModalRef = useTemplateRef('deleteModalRef')
@@ -49,6 +49,10 @@ const getOrders = async () => {
   }
 }
 onMounted(() => {
+  getOrders()
+})
+
+watch(currentPage, () => {
   getOrders()
 })
 

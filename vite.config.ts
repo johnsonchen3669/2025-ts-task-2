@@ -1,11 +1,15 @@
-import { fileURLToPath, resolve, URL } from 'node:url'
+import { fileURLToPath, URL } from 'node:url'
+import { resolve } from 'node:path'
 
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
+
 export default defineConfig({
+  base: process.env.NODE_ENV === 'production' ? '/2025-ts-task-2/' : '/',
   plugins: [vue(), vueDevTools()],
   resolve: {
     alias: {

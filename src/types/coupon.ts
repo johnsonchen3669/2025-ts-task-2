@@ -1,6 +1,6 @@
 export type CouponData = {
   title: string
-  is_enabled: 0 | 1
+  is_enabled: number
   percent: number
   due_date: number
   code: string
@@ -17,7 +17,7 @@ export type Pagination = {
 
 export type CreateCouponParams = {
   title: string
-  is_enabled: 0 | 1
+  is_enabled: number
   percent: number
   due_date: number
   code: string

@@ -70,13 +70,13 @@ const openModal = (coupon?: CouponData) => {
           id: couponData.id,
           data: {
             ...couponData,
-            is_enabled: couponData.is_enabled,
+            is_enabled: Number(couponData.is_enabled),
           },
         })
       } else {
         await apiCreateCoupon({
           ...couponData,
-          is_enabled: couponData.is_enabled,
+          is_enabled: Number(couponData.is_enabled),
         })
       }
     } catch {
